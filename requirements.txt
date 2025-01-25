@@ -1,7 +1,6 @@
 altair==5.5.0
 argcomplete==3.3.0
 attrs==25.1.0
--e git+https://gitlab.com/gateless/doc-ops@64357fc6112d09e10da7a1f540745431f75b52f4#egg=batch_analysis&subdirectory=doc-ops-py/cli/g8way
 blinker==1.9.0
 botocore==1.36.0
 cachetools==5.5.1
