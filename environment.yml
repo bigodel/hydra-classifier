@@ -1,0 +1,20 @@
+name: hydra
+channels:
+- conda-forge
+dependencies:
+- ipykernel
+- ipython
+- ipython_genutils
+- jupyter_client
+- jupyter_core
+- pandas
+- pandera
+- pdf2image
+- pytables
+- pytesseract
+- python=3.12
+- python-lsp-server
+- scikit-learn
+- tesseract
+- traitlets
+
