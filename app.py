@@ -1,11 +1,11 @@
 import streamlit as st
-from transformers import LayoutLMv3Processor, LayoutLMv3ForTokenClassification
+from transformers import LayoutLMv3Processor, LayoutLMv3ForSequenceClassification
 from pdf2image import convert_from_bytes
 from PIL import Image
 
 # Load model and processor
 processor = LayoutLMv3Processor.from_pretrained("microsoft/layoutlmv3-base")
-model = LayoutLMv3ForTokenClassification.from_pretrained("microsoft/layoutlmv3-base")
+model = LayoutLMv3ForSequenceClassification.from_pretrained("microsoft/layoutlmv3-base")
 
 st.title("Document Classification with LayoutLMv3")
 
@@ -26,6 +26,7 @@ if uploaded_file:
         st.image(image, caption=f'Uploaded Image {i}', use_container_width=True)
         # Prepare image for model input
         encoding = processor(image, return_tensors="pt")
+        st.text(f'encoding: {encoding}')
         outputs = model(**encoding)
         predictions = outputs.logits.argmax(-1)
 
