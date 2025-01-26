@@ -17,7 +17,7 @@ uploaded_file = st.file_uploader(
 if uploaded_file:
     # for uploaded_file in uploaded_files:
     if uploaded_file.type == "application/pdf":
-        images = convert_from_bytes(uploaded_file)
+        images = convert_from_bytes(uploaded_file.getvalue())
     else:
         images = [Image.open(uploaded_file)]
 
