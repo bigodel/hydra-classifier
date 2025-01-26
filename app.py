@@ -1,6 +1,6 @@
 import streamlit as st
 from transformers import LayoutLMv3Processor, LayoutLMv3ForTokenClassification
-from pdf2image import convert_from_path
+from pdf2image import convert_from_bytes
 from PIL import Image
 
 # Load model and processor
@@ -17,7 +17,7 @@ uploaded_file = st.file_uploader(
 if uploaded_file:
     # for uploaded_file in uploaded_files:
     if uploaded_file.type == "application/pdf":
-        images = convert_from_path(uploaded_file)
+        images = convert_from_bytes(uploaded_file)
     else:
         images = [Image.open(uploaded_file)]
 
