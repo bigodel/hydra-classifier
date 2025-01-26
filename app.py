@@ -55,7 +55,7 @@ if uploaded_file:
         )
         st.text(f'encoding shape: {encoding}')
         outputs = model(**encoding)
-        prediction = outputs.logits.argmax(-1)[0]
+        prediction = outputs.logits.argmax(-1)[0].item()
 
         # Display predictions (you may want to map indices to labels)
         st.write(f"Prediction: {id2label[prediction]}")
