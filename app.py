@@ -24,7 +24,7 @@ label2id = {v: k for k, v in id2label.items()}
 processor = LayoutLMv3Processor.from_pretrained("microsoft/layoutlmv3-base")
 model = LayoutLMv3ForSequenceClassification.from_pretrained(
     "microsoft/layoutlmv3-base",
-    num_classes=len(labels),
+    num_labels=len(labels),
     id2label=id2label,
     label2id=label2id,
 )
