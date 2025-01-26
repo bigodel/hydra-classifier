@@ -3,11 +3,31 @@ from transformers import LayoutLMv3Processor, LayoutLMv3ForSequenceClassificatio
 from pdf2image import convert_from_bytes
 from PIL import Image
 
-# Load model and processor
+labels = [
+    'budget',
+    'email',
+    'form',
+    'handwritten',
+    'invoice',
+    'language',
+    'letter',
+    'memo',
+    'news article',
+    'questionnaire',
+    'resume',
+    'scientific publication',
+    'specification',
+]
+id2label = {i: label for i, label in enumerate(labels)}
+label2id = {v: k for k, v in id2label.items()}
+
 processor = LayoutLMv3Processor.from_pretrained("microsoft/layoutlmv3-base")
-model = LayoutLMv3ForSequenceClassification.from_pretrained("microsoft/layoutlmv3-base")
-id2label = model.config.id2label
-print(id2label)
+model = LayoutLMv3ForSequenceClassification.from_pretrained(
+    "microsoft/layoutlmv3-base",
+    num_classes=len(labels),
+    id2label=id2label,
+    label2id=label2id,
+)
 
 st.title("Document Classification with LayoutLMv3")
 
