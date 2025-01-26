@@ -25,7 +25,12 @@ if uploaded_file:
     for i, image in enumerate(images):
         st.image(image, caption=f'Uploaded Image {i}', use_container_width=True)
         # Prepare image for model input
-        encoding = processor(image, return_tensors="pt")
+        encoding = processor(
+            image,
+            return_tensors="pt",
+            truncation=True,
+            max_length=512,
+        )
         st.text(f'encoding: {encoding}')
         outputs = model(**encoding)
         predictions = outputs.logits.argmax(-1)
