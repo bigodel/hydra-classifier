@@ -23,7 +23,7 @@ if uploaded_file:
 
     # Process each image for classification
     for i, image in enumerate(images):
-        st.image(image, caption=f'Uploaded Image {i}', use_column_width=True)
+        st.image(image, caption=f'Uploaded Image {i}', use_container_width=True)
         # Prepare image for model input
         encoding = processor(image, return_tensors="pt")
         outputs = model(**encoding)
