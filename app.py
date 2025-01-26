@@ -61,5 +61,6 @@ if uploaded_file:
         )
         if feedback == "No":
             correct_label = st.selectbox(
-                "Please select the correct label:", labels
+                "Please select the correct label:", labels,
+                key=f'selectbox-{i}'
             )
