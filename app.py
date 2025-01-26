@@ -6,6 +6,8 @@ from PIL import Image
 # Load model and processor
 processor = LayoutLMv3Processor.from_pretrained("microsoft/layoutlmv3-base")
 model = LayoutLMv3ForSequenceClassification.from_pretrained("microsoft/layoutlmv3-base")
+id2label = model.config.id2label
+print(id2label)
 
 st.title("Document Classification with LayoutLMv3")
 
@@ -33,14 +35,15 @@ if uploaded_file:
         )
         st.text(f'encoding shape: {encoding}')
         outputs = model(**encoding)
-        predictions = outputs.logits.argmax(-1)
+        prediction = outputs.logits.argmax(-1)[0]
 
         # Display predictions (you may want to map indices to labels)
-        st.write(f"Predictions: {predictions}")
+        st.write(f"Prediction: {id2label[prediction]}")
 
         # User feedback section
         feedback = st.radio(
-            "Is the classification correct?", ("Yes", "No")
+            "Is the classification correct?", ("Yes", "No"),
+            key=f'prediction-{i}'
         )
         if feedback == "No":
             correct_label = st.text_input(
