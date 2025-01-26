@@ -31,22 +31,19 @@ model = LayoutLMv3ForSequenceClassification.from_pretrained(
 
 st.title("Document Classification with LayoutLMv3")
 
-# File uploader for PDFs, JPGs, and PNGs
 uploaded_file = st.file_uploader(
     "Upload Document", type=["pdf", "jpg", "png"], accept_multiple_files=False
 )
 
 if uploaded_file:
-    # for uploaded_file in uploaded_files:
     if uploaded_file.type == "application/pdf":
         images = convert_from_bytes(uploaded_file.getvalue())
     else:
         images = [Image.open(uploaded_file)]
 
-    # Process each image for classification
     for i, image in enumerate(images):
         st.image(image, caption=f'Uploaded Image {i}', use_container_width=True)
-        # Prepare image for model input
+
         encoding = processor(
             image,
             return_tensors="pt",
@@ -56,10 +53,8 @@ if uploaded_file:
         outputs = model(**encoding)
         prediction = outputs.logits.argmax(-1)[0].item()
 
-        # Display predictions (you may want to map indices to labels)
         st.write(f"Prediction: {id2label[prediction]}")
 
-        # User feedback section
         feedback = st.radio(
             "Is the classification correct?", ("Yes", "No"),
             key=f'prediction-{i}'
@@ -68,4 +63,3 @@ if uploaded_file:
             correct_label = st.selectbox(
                 "Please select the correct label:", labels
             )
-            # Here you can implement logic to store or process feedback
