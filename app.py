@@ -65,7 +65,7 @@ if uploaded_file:
             key=f'prediction-{i}'
         )
         if feedback == "No":
-            correct_label = st.text_input(
-                "Please provide the correct label:"
+            correct_label = st.selectbox(
+                "Please select the correct label:", labels
             )
             # Here you can implement logic to store or process feedback
