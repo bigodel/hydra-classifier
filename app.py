@@ -31,7 +31,7 @@ if uploaded_file:
             truncation=True,
             max_length=512,
         )
-        st.text(f'encoding shape: {encoding.shape}')
+        st.text(f'encoding shape: {encoding}')
         outputs = model(**encoding)
         predictions = outputs.logits.argmax(-1)
 
